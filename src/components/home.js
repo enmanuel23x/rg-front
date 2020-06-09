@@ -12,6 +12,11 @@ const bookingRender = ({ resultSet }) => (
         <caption>Tabla booking</caption>
         <thead>
             <tr>
+                <th>ID</th>
+                <th>Client_id</th>
+                <th>Resource_id</th>
+                <th>Project_id</th>
+                <th>Booker_id</th>
                 <th>Booker_email</th>
                 <th>Duration</th>
                 <th>%</th>
@@ -20,9 +25,14 @@ const bookingRender = ({ resultSet }) => (
         <tbody>
             {resultSet.loadResponse.data.map((element, i) => 
                 <tr key={i}>
+                    <td>{element["Booking.id"]}</td>
+                    <td>{element["Booking.clientId"]}</td>
+                    <td>{element["Booking.resourceId"]}</td>
+                    <td>{element["Booking.projectId"]}</td>
+                    <td>{element["Booking.bookerId"]}</td>
                     <td>{element["Booking.bookerEmail"]}</td>
                     <td>{element["Booking.duration"]}</td>
-                    <td>{element["Booking.perc"]}</td>
+                    <td>{element["Booking.percentage"]}</td>
                 </tr>
             )}
         </tbody>
@@ -39,12 +49,14 @@ const bookingRender = ({ resultSet }) => (
         <caption>Tabla client</caption>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
             </tr>
         </thead>
         <tbody>
             {resultSet.loadResponse.data.map((element) => 
                 <tr key={element["Client.name"]}>
+                    <td>{element["Client.id"]}</td>
                     <td>{element["Client.name"]}</td>
                 </tr>
             )}
@@ -62,17 +74,21 @@ const bookingRender = ({ resultSet }) => (
         <caption>Tabla project</caption>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Project_code</th>
                 <th>Notes</th>
+                <th>Client_id</th>
             </tr>
         </thead>
         <tbody>
             {resultSet.loadResponse.data.map((element) => 
-                <tr key={element["Project.name"]}>
+                <tr key={element["Project.id"]}>
+                    <td>{element["Project.id"]}</td>
                     <td>{element["Project.name"]}</td>
                     <td>{element["Project.projectCode"]}</td>
                     <td>{element["Project.notes"]}</td>
+                    <td>{element["Project.clientId"]}</td>
                 </tr>
             )}
         </tbody>
@@ -89,6 +105,7 @@ const bookingRender = ({ resultSet }) => (
         <caption>Tabla resource</caption>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Job_title</th>
@@ -97,6 +114,7 @@ const bookingRender = ({ resultSet }) => (
         <tbody>
             {resultSet.loadResponse.data.map((element) => 
                 <tr key={element["Resource.name"]}>
+                    <td>{element["Resource.id"]}</td>
                     <td>{element["Resource.name"]}</td>
                     <td>{element["Resource.email"]}</td>
                     <td>{element["Resource.jobTitle"]}</td>
@@ -138,9 +156,14 @@ class Home extends Component {
                 <QueryRenderer
                     query={{
                         "dimensions": [
+                            "Booking.id",
+                            "Booking.clientId",
+                            "Booking.resourceId",
+                            "Booking.bookerId",
+                            "Booking.projectId",
                             "Booking.bookerEmail",
                             "Booking.duration",
-                            "Booking.perc"
+                            "Booking.percentage"
                             ],
                         "timeDimensions": [],
                         "filters": []
@@ -151,6 +174,7 @@ class Home extends Component {
                 <QueryRenderer
                     query={{
                         "dimensions": [
+                            "Client.id",
                             "Client.name"
                             ],
                         "timeDimensions": [],
@@ -162,9 +186,11 @@ class Home extends Component {
                 <QueryRenderer
                     query={{
                         "dimensions": [
+                            "Project.id",
                             "Project.name",
                             "Project.projectCode",
-                            "Project.notes"
+                            "Project.notes",
+                            "Project.clientId"
                             ],
                         "timeDimensions": [],
                         "filters": []
@@ -175,6 +201,7 @@ class Home extends Component {
                 <QueryRenderer
                     query={{
                         "dimensions": [
+                            "Resource.id",
                             "Resource.name",
                             "Resource.email",
                             "Resource.jobTitle"
