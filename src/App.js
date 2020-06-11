@@ -1,11 +1,12 @@
 import React from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import "./body.css";
 import "antd/dist/antd.css";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { Layout } from "antd";
 import cubejs from "@cubejs-client/core";
+// import WebSocketTransport from '@cubejs-client/ws-transport';
 import { CubeProvider } from "@cubejs-client/react";
 import client from "./graphql/client";
 import Header from "./components/Header";
@@ -15,6 +16,9 @@ const CUBEJS_TOKEN =
 const cubejsApi = cubejs(CUBEJS_TOKEN, {
   apiUrl: `${API_URL}/cubejs-api/v1`
 });
+// const cubejsApi = cubejs({
+//     transport: new WebSocketTransport({ authorization: CUBEJS_TOKEN, apiUrl: 'ws://localhost:5000/cubejs-api/v1' })
+// });
 
 const AppLayout = ({ children }) => (
   <Layout
