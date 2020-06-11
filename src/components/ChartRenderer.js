@@ -107,6 +107,7 @@ const renderChart = Component => ({ resultSet, error }) =>
   (error && error.toString()) || <Spin />;
 
 const ChartRenderer = ({ vizState }) => {
+  vizState.query = {...vizState.query, renewQuery: true}
   const { query, chartType } = vizState;
   const component = TypeToMemoChartComponent[chartType];
   const renderProps = useCubeQuery(query);
