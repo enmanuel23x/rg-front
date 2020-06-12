@@ -16,6 +16,8 @@ function updateDB(){
 
 }
 
+
+
 const Header = ({ location }) => (
   <Layout.Header
     style={{
@@ -36,13 +38,28 @@ const Header = ({ location }) => (
       style={{
         lineHeight: "64px",
       }}>
-      <Menu.Item key="/explore" className="customclass">
-        <Link to="/explore">Crear Reportes</Link>
-      </Menu.Item>
-      <Menu.Item key="/" className="customclass">
-        <Link to="/">Dashboard</Link>
-      </Menu.Item>
-        <Button type="primary" onClick={() => updateDB()} style={{ backgroundColor: "#08979c", borderColor: "#08979c", float: "right", margin: '16px' }}>Actualizar BD</Button>
+
+
+
+        {window.location.pathname !== '/static' ?
+            <Menu.Item key="/explore" className="customclass">
+                <Link to="/explore">Crear Reportes</Link>
+            </Menu.Item>
+            : null}
+
+        {window.location.pathname !== '/static' ?
+            <Menu.Item key="/" className="customclass">
+                <Link to="/">Dashboard</Link>
+            </Menu.Item>
+            : null}
+        {window.location.pathname === '/static' ?
+            <Menu.Item key="/static" className="customclass">
+                <Link to="/static">Reporte General RG</Link>
+            </Menu.Item>
+            : null}
+        {window.location.pathname === '/static' ?
+            <Button type="primary" onClick={() => updateDB()} style={{ backgroundColor: "#08979c", borderColor: "#08979c", float: "right", margin: '16px' }}>Actualizar BD</Button>
+            : null}
     </Menu>
   </Layout.Header>
 );
