@@ -12,7 +12,7 @@ const Header = ({ location }) => {
     axios.get("http://localhost:5000/test1")
         .then((data) => {
             // alert(data.data)
-            console.log("DB Up to date")
+            //console.log("DB Up to date")
         })
         .catch((err) => {
             console.error(err)

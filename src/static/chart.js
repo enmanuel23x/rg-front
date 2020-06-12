@@ -16,7 +16,7 @@ class MyCSearchTable extends React.Component {
   
     search = value => {
       const { baseData } = this.state;
-      console.log(this.state.columns)
+      //console.log(this.state.columns)
       const filterTable = baseData.filter(o =>
         Object.keys(o).some(k =>
           String(o[k])
@@ -26,7 +26,7 @@ class MyCSearchTable extends React.Component {
       );
   
       this.setState({ filterTable });
-      console.log(filterTable)
+      //console.log(filterTable)
     };
   
     render() {
