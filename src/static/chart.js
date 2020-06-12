@@ -2,17 +2,56 @@ import React from 'react';
 import cubejs from '@cubejs-client/core';
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
-import { Row, Col, Statistic, Table } from 'antd';
+import { Row, Col, Statistic, Table, Input } from 'antd';
 
 const tableRender = ({ resultSet }) => (
-  <Table 
-    pagination={false}
-    columns={resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key }))} 
-    dataSource={resultSet.tablePivot()} 
-  />
-  
+    <MyCSearchTable resultSet={resultSet}/>
 );
 
+class MyCSearchTable extends React.Component {
+    constructor(props) {
+      super(props);
+  
+      this.state = { filterTable: null, columns: props.resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key })), baseData: props.resultSet.tablePivot() };
+    }
+  
+    search = value => {
+      const { baseData } = this.state;
+  
+      const filterTable = baseData.filter(o =>
+        Object.keys(o).some(k =>
+          String(o[k])
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        )
+      );
+  
+      this.setState({ filterTable });
+      console.log(filterTable)
+    };
+  
+    render() {
+      const { filterTable, columns, baseData } = this.state;
+  
+      return (
+        <div>
+            {console.log(columns)}
+          <Input.Search
+            style={{ border: "3px solid red", margin: "0 0 10px 0" }}
+            placeholder="Buscar...."
+            enterButton
+            onSearch={this.search}
+          />
+          <Table 
+  {...this.state}
+    pagination= { {pageSizeOptions: ['3','5','10','25','50'], showSizeChanger: true}}
+    columns={columns} 
+    dataSource={filterTable == null ? baseData : filterTable} 
+  />
+        </div>
+      );
+    }
+  }
 const API_URL = "http://localhost:5000"; // change to your actual endpoint
 
 const cubejsApi = cubejs(
