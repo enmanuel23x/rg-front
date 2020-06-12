@@ -11,7 +11,7 @@ import client from "./graphql/client";
 import Header from "./components/Header";
 import WebSocketTransport from '@cubejs-client/ws-transport';
 import config from './config/config'
-const API_URL = config.apiURL;
+const API_URL = config.webSocket;
 const CUBEJS_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTE3MTgzNjYsImV4cCI6MTU5MTgwNDc2Nn0.A97-l_DYw9lRxezNx2aMzhmUrQkeU5MkODEyVlw3opc";
 const cubejsApi = cubejs({
