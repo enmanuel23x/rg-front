@@ -2,7 +2,7 @@ import React from 'react';
 import cubejs from '@cubejs-client/core';
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
-import { Row, Col, Statistic, Table, Input } from 'antd';
+import { Table, Input } from 'antd';
 
 const tableRender = ({ resultSet }) => (
     <MyCSearchTable resultSet={resultSet}/>
@@ -37,16 +37,16 @@ class MyCSearchTable extends React.Component {
         <div>
             {console.log(columns)}
           <Input.Search
-            style={{ border: "3px solid red", margin: "0 0 10px 0" }}
+            style={{ width: "50%", float: "right", zIndex: "100", position: "absolute", paddingRight: "50px", paddingTop: "15px"}}
             placeholder="Buscar...."
             enterButton
             onSearch={this.search}
           />
           <Table 
   {...this.state}
-    pagination= { {pageSizeOptions: ['3','5','10','25','50'], showSizeChanger: true}}
+  pagination= { {pageSizeOptions: ['3','5','10','25','50'], showSizeChanger: true, position:['topLeft','none']}}
     columns={columns} 
-    dataSource={filterTable == null ? baseData : filterTable} 
+    dataSource={filterTable == null ? baseData : filterTable} style={{paddingLeft: "50px", paddingRight:"50px"}}
   />
         </div>
       );
