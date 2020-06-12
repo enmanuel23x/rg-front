@@ -34,7 +34,6 @@ class MyCSearchTable extends React.Component {
   
       return (
         <div>
-            {console.log(columns)}
           <Input.Search
             style={{ width: "50%", float: "right", zIndex: "100", position: "absolute", paddingRight: "50px", paddingTop: "15px"}}
             placeholder="Buscar...."
@@ -42,11 +41,11 @@ class MyCSearchTable extends React.Component {
             onSearch={this.search}
           />
           <Table 
-  {...this.state}
-  pagination= { {pageSizeOptions: ['3','5','10','25','50'], showSizeChanger: true, position:['topLeft','none']}}
-    columns={columns} 
-    dataSource={filterTable == null ? baseData : filterTable} style={{paddingLeft: "50px", paddingRight:"50px"}}
-  />
+            {...this.state}
+            pagination= { {pageSizeOptions: ['3','5','10','25','50'], showSizeChanger: true, position:['topLeft','none']}}
+            columns={columns} 
+            dataSource={filterTable == null ? baseData : filterTable} style={{paddingLeft: "50px", paddingRight:"50px"}}
+          />
         </div>
       );
     }
