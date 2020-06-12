@@ -11,13 +11,12 @@ const tableRender = ({ resultSet }) => (
 class MyCSearchTable extends React.Component {
     constructor(props) {
       super(props);
-  
-      this.state = { filterTable: null, columns: props.resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key })), baseData: props.resultSet.tablePivot() };
+      this.state = { filterTable: null, columns: props.resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key, align: (c.key == "Inactivity.porcentaje" ? "right":"center") })), baseData: props.resultSet.tablePivot() };
     }
   
     search = value => {
       const { baseData } = this.state;
-  
+      console.log(this.state.columns)
       const filterTable = baseData.filter(o =>
         Object.keys(o).some(k =>
           String(o[k])
@@ -69,6 +68,7 @@ const ChartRenderer = () => <QueryRenderer
   query={{
     "dimensions": [
       "Inactivity.colaborador",
+      "Inactivity.cliente",
       "Inactivity.asignacion",
       "Inactivity.porcentaje",
       "Inactivity.fechaInicio",
