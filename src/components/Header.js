@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import { Layout, Menu, Button } from "antd";
 import axios from "axios";
 
-function updateDB(){
+
+
+const Header = ({ location }) => {
+  const [fecha, setFecha] = useState("Actualizando..");
+  function updateDB(){
     axios.get("http://localhost:5000/test1")
         .then((data) => {
             // alert(data.data)
@@ -15,10 +19,19 @@ function updateDB(){
         })
 
 }
+function updateFecha(){
+  axios.get("http://localhost:5000/getUpdateTime")
+        .then((data) => {
+            // alert(data.data)
+            setFecha(data.data)
+        })
+        .catch((err) => {
+            console.error(err)
+        })
 
-
-
-const Header = ({ location }) => (
+}
+updateFecha()
+  return(
   <Layout.Header
     style={{
       padding: "0 32px"
@@ -57,11 +70,12 @@ const Header = ({ location }) => (
                 <Link to="/static">Reporte General RG</Link>
             </Menu.Item>
             : null}
-        {window.location.pathname === '/static' ?
+            <div style={{float: "right"}}>
+            <small>Ultima Actualización: {fecha}</small>
+        </div>
             <Button type="primary" onClick={() => updateDB()} style={{ backgroundColor: "#08979c", borderColor: "#08979c", float: "right", margin: '16px' }}>Actualizar BD</Button>
-            : null}
     </Menu>
   </Layout.Header>
 );
-
+    };
 export default withRouter(Header);
