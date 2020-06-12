@@ -11,7 +11,21 @@ const tableRender = ({ resultSet }) => (
 class MyCSearchTable extends React.Component {
     constructor(props) {
       super(props);
-      this.state = { filterTable: null, columns: props.resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key, align: (c.key == "Inactivity.porcentaje" ? "right":"center") })), baseData: props.resultSet.tablePivot() };
+      this.state = { 
+        filterTable: null, 
+        columns: props.resultSet.tableColumns().map(c => ({ ...c, dataIndex: c.key, align: (c.key == "Inactivity.porcentaje" ? "right":"center") })), 
+        baseData: props.resultSet.tablePivot().sort(function(a, b) {
+          const af = a["Inactivity.colaborador"]; 
+          const bf = b["Inactivity.colaborador"]; 
+          const as = (a["Inactivity.cliente"] == "----" ? "zzzzzzzzzz" :  a["Inactivity.cliente"]);
+          const bs = (b["Inactivity.cliente"] == "----" ? "zzzzzzzzzz" :  b["Inactivity.cliente"]);
+            
+          if(af == bf) { 
+              return (as < bs) ? -1 : (as > bs) ? 1 : 0; 
+          } else { 
+              return (af < bf) ? -1 : 1; 
+          } 
+      }) };
     }
   
     search = value => {
@@ -31,7 +45,6 @@ class MyCSearchTable extends React.Component {
   
     render() {
       const { filterTable, columns, baseData } = this.state;
-  
       return (
         <div>
           <Input.Search
@@ -51,7 +64,7 @@ class MyCSearchTable extends React.Component {
     }
   }
 const API_URL = config.apiURL; // change to your actual endpoint
-
+//console.log(API_URL)
 const cubejsApi = cubejs(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTE5NzIzOTMsImV4cCI6MTU5MjA1ODc5M30.sTULcuOB8b__YJ0ckwe34AYrxDXj-r3TZxUmlxR-3jU",
   { apiUrl: API_URL + "/cubejs-api/v1" }
