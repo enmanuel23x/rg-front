@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import { Layout, Menu, Button } from "antd";
 import axios from "axios";
-
-
+import config from '../config/config'
 
 const Header = ({ location }) => {
   const [fecha, setFecha] = useState("Actualizando..");
   function updateDB(){
-    axios.get("http://localhost:5000/test1")
+    axios.get(config.backURL+"/test1")
         .then((data) => {
             // alert(data.data)
             //console.log("DB Up to date")
@@ -20,7 +19,7 @@ const Header = ({ location }) => {
 
 }
 function updateFecha(){
-  axios.get("http://localhost:5000/getUpdateTime")
+  axios.get(config.backURL+"/getUpdateTime")
         .then((data) => {
             // alert(data.data)
             setFecha(data.data)

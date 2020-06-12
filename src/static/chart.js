@@ -3,7 +3,7 @@ import cubejs from '@cubejs-client/core';
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
 import { Table, Input } from 'antd';
-
+import config from '../config/config'
 const tableRender = ({ resultSet }) => (
     <MyCSearchTable resultSet={resultSet}/>
 );
@@ -50,7 +50,7 @@ class MyCSearchTable extends React.Component {
       );
     }
   }
-const API_URL = "http://localhost:5000"; // change to your actual endpoint
+const API_URL = config.apiURL; // change to your actual endpoint
 
 const cubejsApi = cubejs(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTE5NzIzOTMsImV4cCI6MTU5MjA1ODc5M30.sTULcuOB8b__YJ0ckwe34AYrxDXj-r3TZxUmlxR-3jU",
