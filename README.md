@@ -1,68 +1,87 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# API CubeJs + React => Front-end
 
-## Available Scripts
+#### v-1.0.0
 
-In the project directory, you can run:
+## 1. Introducción.
 
-### `yarn start`
+Este repositorio contiene el frontend de la API correspondiente a las pruebas con reportes,
+integrando CubeJs, Express + React.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 2. Funcionalidad.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Esta aplicación esta diseñada para ser integrada conjuntamente con el Back-end desarrollado en Expressjs.
 
-### `yarn test`
+## 3. Tipos de conexión.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-  El puerto configurado para ejecutar la aplicación es el **8000**.
 
-### `yarn build`
+## 4. Generalidades sobre la implementación.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Esta aplicación ha sido desarrollada con React.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- La aplicación posee 2 rutas importantes, la /static el cual muestra el reporte requerido y la ruta / la cual muestra 
+un entorno para hacer pruebas personalizadas y crear un dashboard personalizado.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 5. Configuración y Despliegue.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Aspectos a considerar:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Se describe el proceso de instalación y despliegue para la aplicación.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Seguirlo paso a paso debería garantizar la correcta instalación y posterior despliegue o puesta en funcionamiento de los servicios.
+ 
+- Cualquier tipo de contingencia o caso atípico que se pudiera presentar durante el despliegue en un ambiente determinado será documentado en esta fase en el punto **5.4 Resolución de problemas**.
 
-## Learn More
+### 5.1. Pre-requisitos.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Se deben tener configurados los siguientes entornos:**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- NodeJS
 
-### Code Splitting
+- El Back-end de la aplicación debe estar previamente configurado y ejecutándose.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### 5.2. Instalación y configuración.
 
-### Analyzing the Bundle Size
+Paso a paso a seguir para la instalación propiamente de la aplicación:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+1. Clonar el repositorio con `git`.
+2. Acceder a la carpeta donde se haya descargado todo el código fuente del servicio.
+3. Ejecutar `npm install` para instalar todas las dependencias necesarias del servicio.
 
-### Making a Progressive Web App
+#### Configuraciones en el código *(Solo de ser necesario)*
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- Dentro del archivo App.js y el directorio config se encuentran los respectivos archivos de configuración y conexión 
+con el Backend.
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+En App.js se encuentra el siguiente objeto de configuración, el cual debe ser modificado si se cambia el token o en su 
+defecto la URL de la API.
+```javascript
+ const cubejsApi = cubejs({
+   transport: new WebSocketTransport({ authorization: CUBEJS_TOKEN, apiUrl: API_URL })
+ });
+```
 
-### Deployment
+### 5.3. Ejecución.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### `yarn build` fails to minify
+En esta sección se deben considerar los siguientes pasos:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Producción
+
+1. Inicializa el servidor `npm start`.
+
+
+### 5.4. Resolución de problemas.
+
+
+- Token vencido: en este caso verificar que el entorno este no fijado en producción, de ser ese el caso comentar la 
+línea de código:
+
+
+- Puede ocurrir que el acceso a la BD se encuentre denegado, en cuyo caso verificar las credenciales ingresadas y los 
+permisos asociados a dicho usuario.
+
+---
